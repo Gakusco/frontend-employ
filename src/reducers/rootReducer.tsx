@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux';
-import { authReducer, AuthState } from './authReducer';
+import { combineReducers } from "redux";
+import { authReducer } from "./authReducer";
+import { jobOfferReducer } from "./jobOfferReducer";
 
 // export interface RootState {
 //   auth: AuthState;
@@ -7,5 +8,5 @@ import { authReducer, AuthState } from './authReducer';
 
 export const rootReducer = combineReducers({
   auth: authReducer,
-})
-
+  joboffer: jobOfferReducer,
+});

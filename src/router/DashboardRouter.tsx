@@ -1,18 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Redirect, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
+import Swal from "sweetalert2";
+import { NoMatch } from "../component/NoMatch";
+import { ROLE_POSTULANT } from "../helpers/Constants";
 import { MyApplications } from "../screen/MyApplications";
 import { OffersJobScreen } from "../screen/OffersJobScreen";
 import { AppDispatch, RootState } from "../store/store";
-import Swal from "sweetalert2";
-import { ROLE_POSTULANT } from "../helpers/Constants";
-import { NoMatch } from "../component/NoMatch";
+import { JobOfferDetails } from '../screen/JobOfferDetails';
 
 export const DashboardRouter = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { data } = useSelector((state: RootState) => state.auth);
-  console.log("rol");
-  console.log(data);
   const logout = () => {
     Swal.fire({
       title: "¿Quieres cerrar sesión?",
@@ -58,6 +57,7 @@ export const DashboardRouter = () => {
         {data?.role.includes(ROLE_POSTULANT) ? (
           <Switch>
             <Route exact path="/job-offers" component={OffersJobScreen} />
+            <Route exact path="/job-offers/:id" component={JobOfferDetails} />
             <Route exact path="/my-applications" component={MyApplications} />
             <Route component={NoMatch} />
           </Switch>

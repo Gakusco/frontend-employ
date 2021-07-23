@@ -1,18 +1,16 @@
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import dayjs from "dayjs";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { Loading } from "../component/Loading";
+import { KEY_TOKEN } from "../helpers/Constants";
+import { TokenDecode } from "../interface/interface";
+import { AppDispatch, RootState } from "../store/store";
 import { DashboardRouter } from "./DashboardRouter";
 import { HomeRouter } from "./HomeRouter";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRouter } from "./PublicRouter";
-import { useEffect, useState } from "react";
-import { KEY_TOKEN } from "../helpers/Constants";
-import jwtDecode from "jwt-decode";
-import { TokenDecode } from "../interface/interface";
-import dayjs from "dayjs";
-import { authAction } from "../reducers/authReducer";
-import { RootState, AppDispatch } from "../store/store";
-import { Loading } from "../component/Loading";
-import { NoMatch } from '../component/NoMatch';
 
 export const AppRouter = () => {
   const { data, isOnline } = useSelector((state: RootState) => state.auth);

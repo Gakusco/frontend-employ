@@ -16,7 +16,7 @@ export const PublicRouter = ({
     <Route
       {...rest}
       component={(props: any) =>
-        !isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
+        !isLoggedIn ? <Component {...props} /> : <Redirect to="/job-offers" />
       }
     />
   );

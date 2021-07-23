@@ -1,20 +1,21 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React from "react";
-import { TextError } from "../component/TextError";
-import { loginValidation } from "../schema/schemas";
-import { LoginRQ } from "../request/loginRQ";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 import BackgroundTie from "../assets/images/tie-background.jpg";
-import { constants } from "buffer";
-import { orangeLight } from "../helpers/Constants";
 import Logo from "../assets/logo/logo.png";
-import { useDispatch } from 'react-redux';
+import { TextError } from "../component/TextError";
+import { cyanLight, orangeLight } from "../helpers/Constants";
+import { LoginRQ } from "../request/loginRQ";
+import { loginValidation } from "../schema/schemas";
 import { login } from '../actions/auth';
 
 const initialValues: LoginRQ = { username: "", password: "" };
 
-export const HomeScreen = () => {
-
+export const LoginScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = (
     values: LoginRQ,
@@ -23,6 +24,11 @@ export const HomeScreen = () => {
     dispatch(login(values));
     setSubmitting(false);
   };
+
+  const navigateLogin = () => {
+    history.push("/auth/register");
+  };
+
   return (
     <div
       style={{
@@ -45,10 +51,31 @@ export const HomeScreen = () => {
         }}
       >
         <div
-          style={{ backgroundColor: "white", width: "90%", padding: "30px" }}
+          style={{
+            backgroundColor: "white",
+            width: "90%",
+            padding: "30px",
+            WebkitBoxShadow: "0px 7px 11px -10px #000000",
+            boxShadow: "0px 7px 11px -10px #000000",
+          }}
         >
-          <div style={{width: '100%'}}>
-            <img src={Logo} alt="logo portal de empleo" style={{width: '100%'}}/>
+          <RegisterContainerSmall>
+            <div style={{ fontSize: 25 }}>¿Buscas empleo?</div>
+            <button
+              type="button"
+              className="btn btn-danger"
+              style={{ width: "90%", height: "50px", fontSize: 25 }}
+              onClick={navigateLogin}
+            >
+              ¡ÚNETE!
+            </button>
+          </RegisterContainerSmall>
+          <div style={{ width: "100%" }}>
+            <img
+              src={Logo}
+              alt="logo portal de empleo"
+              style={{ width: "100%" }}
+            />
           </div>
           <div>
             <Formik
@@ -98,6 +125,62 @@ export const HomeScreen = () => {
           </div>
         </div>
       </div>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <RegisterContainer>
+          <h2>¿Buscas empleo?</h2>
+          <button
+            type="button"
+            className="btn btn-danger"
+            style={{ width: "290px", height: "90px", fontSize: 35 }}
+            onClick={navigateLogin}
+          >
+            ¡ÚNETE!
+          </button>
+        </RegisterContainer>
+      </div>
     </div>
   );
 };
+
+const transparentCyan = `rgba(77, 255, 234, 0.85)`;
+
+const RegisterContainer = styled.div`
+  background-color: ${transparentCyan};
+  width: 60%;
+  height: 300px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  -webkit-box-shadow: 0px 7px 11px -10px #000000;
+  box-shadow: 0px 7px 11px -10px #000000;
+
+  @media screen and (max-width: 836px) {
+    display: none;
+  }
+`;
+
+const RegisterContainerSmall = styled.div`
+  background-color: ${cyanLight};
+  width: 100%;
+  height: 150px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 836px) {
+    display: none;
+  }
+`;

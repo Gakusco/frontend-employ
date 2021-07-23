@@ -1,11 +1,13 @@
 export interface AuthState {
   data?: Data;
+  isOnline: boolean;
 }
 
 interface Data {
   access_token: string;
   role: string[];
   credentialId: number;
+  userId: number;
 }
 
 export type authAction =
@@ -18,7 +20,8 @@ export type authAction =
     };
 
 const initialState: AuthState = {
-  data: undefined
+  data: undefined,
+  isOnline: false,
 }
 
 export const authReducer = (
@@ -30,9 +33,10 @@ export const authReducer = (
       return {
         ...state,
         data: action.payload.data,
+        isOnline: action.payload.isOnline
       };
     case "clear":
-      return {data: undefined};
+      return {data: undefined, isOnline: false};
     default:
       return state;
   }

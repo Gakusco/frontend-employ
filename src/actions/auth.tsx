@@ -20,9 +20,19 @@ export const login = (credentials: LoginRQ) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
       if (status === 200 && data.access_token) {
-        console.log(data.access_token);
         localStorage.setItem("token", data.access_token);
-        dispatch({ type: "save", payload: data });
+        dispatch({
+          type: "save",
+          payload: {
+            isOnline: true,
+            data: {
+              access_token: data.access_token,
+              role: data.role,
+              credentialId: data.credentialId,
+              userId: data.userId,
+            },
+          },
+        });
       }
     } catch (error) {
       console.log(JSON.stringify(error.response.data, null, 3));

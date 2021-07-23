@@ -8,9 +8,17 @@ const employApi = axios.create({ baseURL });
 employApi.interceptors.request.use((config) => {
   console.log(`URI CALL: ${baseURL}${config.url}`);
   const token = localStorage.getItem(KEY_TOKEN);
-
-  if (token) {
+  console.log(token);
+  if (
+    token &&
+    config.url !== "/auth/register" &&
+    config.url !== "/oauth/token"
+  ) {
     config.headers["Authorization"] = "Bearer " + token;
+  }
+  if (config.url !== "/oauth/token") {
+    config.headers["Content-Type"] = "application/json";
+    // config.headers["Accept"] = "application/json";
   }
   return config;
 });

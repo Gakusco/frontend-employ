@@ -28,4 +28,34 @@ export interface Business {
   aboutUs: string;
   email: string;
   enable: boolean;
+  jobOfferList: JobOfferList[];
+}
+export interface JobOfferList {
+  id: number;
+  enabled: boolean;
+}
+export interface Postulant {
+  id: number;
+  name: string;
+  lastName: string;
+  credential: Credential;
+  web: string;
+  phoneNumber: string;
+  run: string;
+  email: string;
+  dateOfBirth: string;
+  curriculumVitae: string;
+}
+
+export interface Credential {
+  id: number;
+  username: string;
+  password: string;
+  enabled: boolean;
+  roles: Role[];
+}
+
+export interface Role {
+  id: number;
+  role: string;
 }

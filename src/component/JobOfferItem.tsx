@@ -1,20 +1,20 @@
-import React from "react";
-import { JobOffer } from "../response/response";
 import dayjs from "dayjs";
+import React from "react";
 import { SiCashapp } from "react-icons/all";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from "react-router-dom";
+import { JobOffer } from "../response/response";
 
 interface Props {
   jobOffer: JobOffer;
 }
 
 export const JobOfferItem = ({ jobOffer }: Props) => {
-
   const history = useHistory();
+  const location = useLocation();
 
   const navigateDetail = () => {
-    history.push("/job-offers/"+jobOffer.id);
-  }
+    history.push("/job-offers/" + jobOffer.id);
+  };
 
   return (
     <div
@@ -32,9 +32,14 @@ export const JobOfferItem = ({ jobOffer }: Props) => {
             {jobOffer.salary}
           </p>
         </div>
-        <button className="btn btn-success mt-2 w-100" onClick={navigateDetail}>
-          Ver más
-        </button>
+        {location.pathname !== "/my-applications" && (
+          <button
+            className="btn btn-success mt-2 w-100"
+            onClick={navigateDetail}
+          >
+            Ver más
+          </button>
+        )}
       </div>
     </div>
   );

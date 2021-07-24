@@ -10,3 +10,12 @@ export interface TokenDecode {
   exp: number;
   userId: number;
 }
+
+export interface QuantityOfferBusiness {
+  quantityByBusiness: NameQuantity[];
+}
+
+export interface NameQuantity {
+  name: string;
+  quantity: number;
+}

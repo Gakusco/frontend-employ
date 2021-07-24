@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listJobOffer } from "../actions/joboffer";
+import { JobOfferItem } from "../component/JobOfferItem";
 import { RootState } from "../store/store";
-import { JobOfferItem } from '../component/JobOfferItem';
 
 export const OffersJobScreen = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,16 @@ export const OffersJobScreen = () => {
     dispatch(listJobOffer());
   }, []);
   return (
-    <div className="card-group">
-      {data?.offerList.map((jobOffer) => (
-        <JobOfferItem jobOffer={jobOffer} />
-      ))}
+    <div>
+      <div style={{ margin: "20px" }}>
+        <h2>Ofertas de trabajo</h2>
+        <hr />
+      </div>
+      <div className="card-group">
+        {data?.offerList?.filter(jobOffer => jobOffer.enabled)?.map((jobOffer, index) => (
+          <JobOfferItem key={index} jobOffer={jobOffer} />
+        ))}
+      </div>
     </div>
   );
 };

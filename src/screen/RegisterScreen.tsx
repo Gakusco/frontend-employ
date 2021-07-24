@@ -105,12 +105,15 @@ export const RegisterScreen = () => {
             boxShadow: "0px 7px 11px -10px #000000",
           }}
         >
-          <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <img
               src={Logo}
               alt="logo portal de empleo"
               style={{ width: "20%" }}
             />
+            <button className="btn btn-info" onClick={() => history.goBack()}>
+              Regresar
+            </button>
           </div>
           <div>
             {errors && (
@@ -134,38 +137,74 @@ export const RegisterScreen = () => {
                     <div className="form-row">
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="name">Nombre</label>
-                        <Field
-                          className="form-control"
-                          name="name"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-user" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.name
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="name"
+                            type="text"
+                            placeholder="Danixa Estel"
+                          />
+                        </div>
                         <ErrorMessage name="name" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="lastName">Apellidos</label>
-                        <Field
-                          className="form-control"
-                          name="lastName"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-user" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.lastName
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="lastName"
+                            type="text"
+                            placeholder="Gutierrez Estel"
+                          />
+                        </div>
                         <ErrorMessage name="lastName" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="run">R.U.N</label>
-                        <Field
-                          className="form-control"
-                          name="run"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-user" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.run
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="run"
+                            type="text"
+                            placeholder="19.342.212-2"
+                          />
+                        </div>
                         <ErrorMessage name="run" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="dateOfBirth">Fecha de nacimiento</label>
+
                         <Field
-                          className="form-control"
+                          className={
+                            formik.errors.dateOfBirth
+                              ? "form-control is-invalid"
+                              : "form-control"
+                          }
                           name="dateOfBirth"
                           type="date"
                           max={mayorOfAge}
+                          placeholder="22-09-2000"
                         />
                         <ErrorMessage
                           name="dateOfBirth"
@@ -174,22 +213,42 @@ export const RegisterScreen = () => {
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="email">Correo</label>
-                        <Field
-                          className="form-control"
-                          name="email"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            @
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.email
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="email"
+                            type="text"
+                            placeholder="correo@dominio.com"
+                          />
+                        </div>
                         <ErrorMessage name="email" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="curriculumVitae">
                           Curriculum vitae
                         </label>
-                        <Field
-                          className="form-control"
-                          name="curriculumVitae"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-file-pdf-o" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.curriculumVitae
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="curriculumVitae"
+                            type="text"
+                            placeholder="adjuntar currículum"
+                          />
+                        </div>
                         <ErrorMessage
                           name="curriculumVitae"
                           component={TextError}
@@ -197,11 +256,21 @@ export const RegisterScreen = () => {
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="phoneNumber">Número de teléfono</label>
-                        <Field
-                          className="form-control"
-                          name="phoneNumber"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-mobile" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.phoneNumber
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="phoneNumber"
+                            type="text"
+                            placeholder="+56934231234"
+                          />
+                        </div>
                         <ErrorMessage
                           name="phoneNumber"
                           component={TextError}
@@ -209,38 +278,74 @@ export const RegisterScreen = () => {
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="web">web</label>
-                        <Field
-                          className="form-control"
-                          name="web"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            www
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.web
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="web"
+                            type="text"
+                            placeholder="www.misitioweb.com"
+                          />
+                        </div>
                         <ErrorMessage name="web" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="username">Usuario</label>
-                        <Field
-                          className="form-control"
-                          name="username"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-user" />
+                          </span>
+                          <Field
+                            className="form-control"
+                            name="username"
+                            type="text"
+                          />
+                        </div>
                         <ErrorMessage name="username" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="password">Contraseña</label>
-                        <Field
-                          className="form-control"
-                          name="password"
-                          type="password"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-shield" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.password
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="password"
+                            type="password"
+                          />
+                        </div>
                         <ErrorMessage name="password" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="passwordTwo">Repetir contraseña</label>
-                        <Field
-                          className="form-control"
-                          name="passwordTwo"
-                          type="password"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-shield" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.passwordTwo ||
+                              (formik.values.password !==
+                                formik.values.passwordTwo &&
+                                formik.values.password !== "")
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="passwordTwo"
+                            type="password"
+                          />
+                        </div>
                         <ErrorMessage
                           name="passwordTwo"
                           component={TextError}
@@ -252,7 +357,8 @@ export const RegisterScreen = () => {
                           className="btn btn-outline-primary w-100"
                           disabled={
                             !(formik.dirty && formik.isValid) ||
-                            formik.isSubmitting
+                            formik.isSubmitting ||
+                            formik.values.password !== formik.values.passwordTwo
                           }
                         >
                           Registrar

@@ -9,7 +9,7 @@ import { TextError } from "../component/TextError";
 import { cyanLight, orangeLight } from "../helpers/Constants";
 import { LoginRQ } from "../request/loginRQ";
 import { loginValidation } from "../schema/schemas";
-import { login } from '../actions/auth';
+import { login } from "../actions/auth";
 
 const initialValues: LoginRQ = { username: "", password: "" };
 
@@ -89,20 +89,40 @@ export const LoginScreen = () => {
                     <div className="form-row">
                       <div className="form-group col-12 mb-2">
                         <label htmlFor="name">Usuario</label>
-                        <Field
-                          className="form-control"
-                          name="username"
-                          type="text"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-user" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.username
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="username"
+                            type="text"
+                          />
+                        </div>
+
                         <ErrorMessage name="username" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-4">
                         <label htmlFor="password">Contraseña</label>
-                        <Field
-                          className="form-control"
-                          name="password"
-                          type="password"
-                        />
+                        <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <i className="fa fa-shield" />
+                          </span>
+                          <Field
+                            className={
+                              formik.errors.password
+                                ? "form-control is-invalid"
+                                : "form-control"
+                            }
+                            name="password"
+                            type="password"
+                          />
+                        </div>
+
                         <ErrorMessage name="password" component={TextError} />
                       </div>
                       <div className="form-group col-12 mb-4">

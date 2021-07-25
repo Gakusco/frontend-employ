@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+const SUPPORTED_FORMATS = ["pdf"];
+
 export const loginValidation = yup.object({
   username: yup.string().required("El usuario es requerido"),
   password: yup.string().required("La contraseña es requerida"),
@@ -25,7 +27,6 @@ export const registerValidation = yup.object({
       "formato: jmartin@gmail.com"
     ),
   dateOfBirth: yup.string().required("La fecha de nacimiento es requerida"),
-  curriculumVitae: yup.string().required("El curriculum es requerido"),
   phoneNumber: yup
     .string()
     .required("El número de teléfono es requerido")

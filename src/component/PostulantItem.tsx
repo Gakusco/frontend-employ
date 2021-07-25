@@ -1,35 +1,37 @@
-import React from 'react'
-import { Postulant } from '../response/response';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { togglePostulant } from '../actions/postulant';
+import React from "react";
+import { Postulant } from "../response/response";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { togglePostulant } from "../actions/postulant";
+import { downloadFile } from "../services/uploadFile";
 
 interface Props {
   postulant: Postulant;
 }
 
-export const PostulantItem = ({postulant}: Props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+const baseURL = process.env.REACT_APP_API_EMPLOYMENT;
 
-  const navigateUpdate = () => {
-    dispatch({ type: "postulant-active", payload: postulant });
-    history.push("/business/add");
-  };
+export const PostulantItem = ({ postulant }: Props) => {
+  const dispatch = useDispatch();
 
   return (
     <tr>
       <th scope="row">{postulant.id}</th>
       <td>{postulant.name}</td>
-      <td>
-        {postulant.lastName}
-      </td>
+      <td>{postulant.lastName}</td>
       <td>{postulant.email}</td>
       <td>{postulant.web}</td>
       <td>{postulant.phoneNumber}</td>
       <td>{postulant.run}</td>
       <td>{postulant.dateOfBirth}</td>
-      <td>{postulant.curriculumVitae}</td>
+      <td>
+        <a
+          href={`${baseURL}/auth/download/${postulant.curriculumVitae}`}
+          className="btn btn-danger"
+        >
+          <i className="fa fa-file-pdf-o" />
+        </a>
+      </td>
       <td>
         {postulant?.credential?.enabled === true ? (
           <button className="btn btn-danger" title="deshabilitar">
@@ -49,4 +51,4 @@ export const PostulantItem = ({postulant}: Props) => {
       </td>
     </tr>
   );
-}
+};

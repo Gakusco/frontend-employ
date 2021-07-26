@@ -35,7 +35,6 @@ export const login = (credentials: LoginRQ) => {
         });
       }
     } catch (error) {
-      console.log(JSON.stringify(error.response.data, null, 3));
       Swal.fire("Cuidado", "Credenciales inválidas", "warning");
     }
   };

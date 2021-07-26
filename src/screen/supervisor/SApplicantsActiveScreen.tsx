@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { jobOfferListPostulant } from "../../actions/jobOfferSuper";
 import { useEffect } from "react";
 import { PostulantActiveItem } from "../../component/PostulantActiveItem";
 import { useHistory } from "react-router-dom";
+import employApi from "../../api/employApi";
+import Swal from 'sweetalert2';
 
 export const SApplicantsActiveScreen = () => {
   const dispatch = useDispatch();
@@ -13,9 +15,30 @@ export const SApplicantsActiveScreen = () => {
     (state: RootState) => state.jobOfferSuper
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     dispatch(jobOfferListPostulant(activeJobOffer?.id ?? 0));
   }, []);
+
+  const sendEmail = async () => {
+    if (activeJobOffer) {
+      setIsLoading(true);
+      try {
+        const {data, status} = await employApi.get("/send/all/" + activeJobOffer.id);
+        if (status === 200){
+          Swal.fire("Éxito", "Se ha enviado el correo con éxito", "success");
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+        }
+      } catch (error) {
+        Swal.fire("Error", "Ha ocurrido un error", "error");
+        setIsLoading(false);
+      }
+    }
+  };
+
   return (
     <div
       style={{
@@ -42,10 +65,7 @@ export const SApplicantsActiveScreen = () => {
               }}
             >
               <h2>Postulantes de la oferta de trabajo</h2>
-              <button
-                className="btn btn-info"
-                onClick={() => history.goBack()}
-              >
+              <button className="btn btn-info" onClick={() => history.goBack()}>
                 Regresar
               </button>
             </div>
@@ -53,6 +73,10 @@ export const SApplicantsActiveScreen = () => {
           {postulantListActive !== undefined &&
           postulantListActive?.length > 0 ? (
             <div className="card-body">
+              <p>Enviar correo con los postulantes a la empresa</p>
+              <button className="btn btn-success" onClick={sendEmail} disabled={isLoading}>
+                {isLoading ? (<i className="fa fa-spinner fa-spin fa-fw"/>) : "Enviar"}
+              </button>
               <div className="table-responsive" style={{ width: "100%" }}>
                 <table className="table text-center">
                   <thead>

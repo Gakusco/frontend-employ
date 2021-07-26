@@ -13,6 +13,7 @@ export const SBusinessScreen = () => {
   useEffect(() => {
     dispatch(listBusiness());
     dispatch({type: "business-inactive"});
+    dispatch({type: "job-offer-list-clean"});
   }, []);
 
   return (

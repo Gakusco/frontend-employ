@@ -9,6 +9,7 @@ export interface JobOfferSuperState {
 
 export type jobOfferSuperAction =
   | { type: "job-offer-list"; payload: JobOffer[] }
+  | { type: "job-offer-list-clean" }
   | { type: "job-offer-save"; payload: JobOffer }
   | { type: "job-offer-update"; payload: JobOffer }
   | { type: "job-offer-toggle"; payload: JobOffer }
@@ -77,6 +78,11 @@ export const jobOfferSuperReducer = (
         ...state,
         postulantListActive: undefined,
       };
+    case "job-offer-list-clean":
+      return {
+        ...state,
+        jobOfferList: [],
+      }
     default:
       return state;
   }

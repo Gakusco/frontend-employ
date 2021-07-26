@@ -13,6 +13,7 @@ export const listJobOfferByBusinessId = (businessId: number) => {
         "/business/job-offers/" + businessId
       );
       if (status === 200) {
+        console.log(data.jobOfferList);
         dispatch({ type: "job-offer-list", payload: data.jobOfferList });
       }
     } catch (error) {
